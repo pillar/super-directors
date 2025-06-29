@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Directors - AI 视频创作套件</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 id="app-title">🎬 Super Directors</h1>
+            <p id="app-subtitle">全能 AI 视频创作套件 - 从故事构思到成片制作</p>
+            <div style="margin-top: 20px;">
+                <span style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; margin: 0 5px;" id="feature-story">📝 故事生成</span>
+                <span style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; margin: 0 5px;" id="feature-script">🎥 脚本创作</span>
+                <span style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; margin: 0 5px;" id="feature-video">🎬 视频生成</span>
+                <span style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 20px; margin: 0 5px;" id="feature-audio">🎵 音频同步</span>
+            </div>
+            <div style="margin-top: 20px;">
+                <button class="btn btn-secondary" onclick="toggleLanguage()" id="lang-toggle">🌐 English</button>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎲</div>
+                <h3 id="feature-card-1-title">故事种子生成器</h3>
+                <p id="feature-card-1-desc">智能生成创意故事点子，支持多种类型和风格，中英双语支持，涵盖类型、场景、角色等丰富元素。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3 id="feature-card-2-title">AI 导演助手</h3>
+                <p id="feature-card-2-desc">基于先进语言模型，生成好莱坞级别的剧本提示词，包含专业的摄影指导、灯光设计和视觉特效。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 id="feature-card-3-title">高速视频生成</h3>
+                <p id="feature-card-3-desc">采用最新的 AI 视频生成技术，支持多种模型，生成高质量4-8秒视频片段。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎵</div>
+                <h3 id="feature-card-4-title">智能配音配乐</h3>
+                <p id="feature-card-4-desc">自动生成匹配的音景效果，包括对话、环境音和背景音乐，完美同步视频内容。</p>
+            </div>
+        </div>
+
+        <div class="workspace">
+            <div class="tab-container">
+                <button class="tab active" onclick="switchTab('story')" id="tab-story">📝 故事生成</button>
+                <button class="tab" onclick="switchTab('script')" id="tab-script">🎥 脚本制作</button>
+                <button class="tab" onclick="switchTab('video')" id="tab-video">🎬 视频生成</button>
+                <button class="tab" onclick="switchTab('settings')" id="tab-settings">⚙️ 设置</button>
+            </div>
+
+            <!-- 故事生成标签页 -->
+            <div id="story-tab" class="tab-content active">
+                <h2 style="margin-bottom: 20px; color: #4a5568;" id="story-generator-title">🎲 故事创意生成器</h2>
+                <div class="grid-2">
+                    <div>
+                        <div class="form-group">
+                            <label for="story-genre" id="label-story-genre">故事类型</label>
+                            <select id="story-genre">
+                                <option value="sci-fi">科幻</option>
+                                <option value="fantasy">奇幻</option>
+                                <option value="thriller">惊悚</option>
+                                <option value="romance">爱情</option>
+                                <option value="comedy">喜剧</option>
+                                <option value="drama">剧情</option>
+                                <option value="action">动作</option>
+                                <option value="horror">恐怖</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="story-setting" id="label-story-setting">故事场景</label>
+                            <select id="story-setting">
+                                <option value="future">未来世界</option>
+                                <option value="modern">现代都市</option>
+                                <option value="historical">历史时期</option>
+                                <option value="fantasy-world">奇幻世界</option>
+                                <option value="space">太空</option>
+                                <option value="underwater">海底</option>
+                                <option value="forest">森林</option>
+                                <option value="desert">沙漠</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="story-mood" id="label-story-mood">故事基调</label>
+                            <select id="story-mood">
+                                <option value="optimistic">乐观积极</option>
+                                <option value="mysterious">神秘悬疑</option>
+                                <option value="dark">黑暗沉重</option>
+                                <option value="humorous">幽默风趣</option>
+                                <option value="romantic">浪漫温馨</option>
+                                <option value="intense">紧张刺激</option>
+                            </select>
+                        </div>
+                        <button class="btn" onclick="generateStory()" id="generate-story-btn">🎲 生成故事创意</button>
+                    </div>
+                    <div>
+                        <div id="story-output" class="output-area">
+                            <div>
+                                <h3 id="waiting-story-title">等待生成故事创意...</h3>
+                                <p id="waiting-story-desc">选择您喜欢的类型、场景和基调，然后点击生成按钮</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="story-suggestions">
+                    <div class="story-card" onclick="selectStory(this)">
+                        <h4>🕰️ 时间旅行者的最终选择</h4>
+                        <p>一个科学家发现了时间旅行的秘密，但每次使用都会改变历史，他必须做出最终选择...</p>
+                    </div>
+                    <div class="story-card" onclick="selectStory(this)">
+                        <h4>🌙 月球咖啡馆</h4>
+                        <p>在月球上开了一家咖啡馆的外星人，每天接待来自不同星球的客人，听他们讲述各自的故事...</p>
+                    </div>
+                    <div class="story-card" onclick="selectStory(this)">
+                        <h4>🎭 记忆收集者</h4>
+                        <p>在一个记忆可以被提取和交易的世界里，一个收集者发现了一段不应该存在的记忆...</p>
+                    </div>
+                    <div class="story-card" onclick="selectStory(this)">
+                        <h4>🌊 深海邮递员</h4>
+                        <p>在海底城市工作的邮递员，负责在不同的海洋文明之间传递信息，直到他发现了一个危险的秘密...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 脚本制作标签页 -->
+            <div id="script-tab" class="tab-content">
+                <h2 style="margin-bottom: 20px; color: #4a5568;" id="script-maker-title">🎥 AI 脚本制作</h2>
+                <div class="grid-2">
+                    <div>
+                        <div class="form-group">
+                            <label for="story-input" id="label-story-input">故事概要</label>
+                            <textarea id="story-input" placeholder="输入您的故事概要或从故事生成器中选择..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="scene-style" id="label-scene-style">场景风格</label>
+                            <select id="scene-style">
+                                <option value="cinematic">电影级</option>
+                                <option value="documentary">纪录片</option>
+                                <option value="artistic">艺术风格</option>
+                                <option value="commercial">商业广告</option>
+                                <option value="animation">动画风格</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="camera-movement" id="label-camera-movement">摄影机运动</label>
+                            <select id="camera-movement">
+                                <option value="static">静态拍摄</option>
+                                <option value="pan">平移</option>
+                                <option value="tilt">俯仰</option>
+                                <option value="zoom">变焦</option>
+                                <option value="dolly">推拉</option>
+                                <option value="crane">升降</option>
+                            </select>
+                        </div>
+                        <button class="btn" onclick="generateScript()" id="generate-script-btn">🤖 生成专业脚本</button>
+                    </div>
+                    <div>
+                        <div id="script-output" class="output-area">
+                            <div>
+                                <h3 id="waiting-script-title">等待生成脚本...</h3>
+                                <p id="waiting-script-desc">AI 导演将为您创建专业的拍摄脚本，包含详细的摄影指导</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 视频生成标签页 -->
+            <div id="video-tab" class="tab-content">
+                <h2 style="margin-bottom: 20px; color: #4a5568;" id="video-generator-title">🎬 视频生成</h2>
+                <div class="grid-2">
+                    <div>
+                        <div class="form-group">
+                            <label for="video-prompt" id="label-video-prompt">视频提示词</label>
+                            <textarea id="video-prompt" placeholder="输入详细的视频描述，或从脚本制作中导入..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="video-duration" id="label-video-duration">视频时长</label>
+                            <select id="video-duration">
+                                <option value="4">4秒</option>
+                                <option value="6">6秒</option>
+                                <option value="8">8秒</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="video-resolution" id="label-video-resolution">分辨率</label>
+                            <select id="video-resolution">
+                                <option value="720p">720p (HD)</option>
+                                <option value="1080p">1080p (Full HD)</option>
+                                <option value="1440p">1440p (2K)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="video-model" id="label-video-model">视频模型</label>
+                            <select id="video-model">
+                                <option value="runway">RunwayML Gen-3</option>
+                                <option value="pika">Pika Labs</option>
+                                <option value="stable">Stable Video Diffusion</option>
+                                <option value="custom">自定义 API</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="add-audio" checked> 
+                                <span id="label-add-audio">自动生成配音</span>
+                            </label>
+                        </div>
+                        <button class="btn" onclick="generateVideo()" id="generate-video-btn">🎬 生成视频</button>
+                    </div>
+                    <div>
+                        <div id="video-output" class="output-area">
+                            <div>
+                                <h3 id="waiting-video-title">等待生成视频...</h3>
+                                <p id="waiting-video-desc">选择参数并点击生成，AI 将为您创建高质量的视频内容</p>
+                            </div>
+                        </div>
+                        <div id="video-loading" class="loading">
+                            <div class="spinner"></div>
+                            <p id="loading-text">正在生成视频，请稍候...</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                            <small id="loading-detail">预计需要 30-60 秒</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 设置标签页 -->
+            <div id="settings-tab" class="tab-content">
+                <h2 style="margin-bottom: 20px; color: #4a5568;" id="settings-title">⚙️ API 配置</h2>
+                <div class="grid-2">
+                    <div>
+                        <!-- 文本生成 API 配置 -->
+                        <div class="api-config">
+                            <h4 id="text-api-title">🤖 文本生成 API <span class="status-indicator" id="text-api-status"></span></h4>
+                            <div class="form-group">
+                                <label for="text-api-provider" id="label-text-provider">服务提供商</label>
+                                <select id="text-api-provider" onchange="updateTextApiFields()">
+                                    <option value="openai">OpenAI GPT</option>
+                                    <option value="claude">Anthropic Claude</option>
+                                    <option value="gemini">Google Gemini</option>
+                                    <option value="custom">自定义 API</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="text-api-url" id="label-text-url">API 地址</label>
+                                <input type="url" id="text-api-url" placeholder="https://api.openai.com/v1">
+                            </div>
+                            <div class="form-group">
+                                <label for="text-api-key" id="label-text-key">API 密钥</label>
+                                <input type="password" id="text-api-key" placeholder="sk-...">
+                            </div>
+                            <div class="form-group">
+                                <label for="text-model" id="label-text-model">模型</label>
+                                <input type="text" id="text-model" placeholder="gpt-4">
+                            </div>
+                            <button class="btn btn-secondary" onclick="testTextApi()" id="test-text-btn">🔧 测试连接</button>
+                        </div>
+
+                        <!-- 视频生成 API 配置 -->
+                        <div class="api-config">
+                            <h4 id="video-api-title">🎬 视频生成 API <span class="status-indicator" id="video-api-status"></span></h4>
+                            <div class="form-group">
+                                <label for="video-api-provider" id="label-video-provider">服务提供商</label>
+                                <select id="video-api-provider" onchange="updateVideoApiFields()">
+                                    <option value="runway">RunwayML</option>
+                                    <option value="pika">Pika Labs</option>
+                                    <option value="stable">Stability AI</option>
+                                    <option value="custom">自定义 API</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="video-api-url" id="label-video-url">API 地址</label>
+                                <input type="url" id="video-api-url" placeholder="https://api.runwayml.com/v1">
+                            </div>
+                            <div class="form-group">
+                                <label for="video-api-key" id="label-video-key">API 密钥</label>
+                                <input type="password" id="video-api-key" placeholder="rw_...">
+                            </div>
+                            <button class="btn btn-secondary" onclick="testVideoApi()" id="test-video-btn">🔧 测试连接</button>
+                        </div>
+
+                        <!-- 音频生成 API 配置 -->
+                        <div class="api-config">
+                            <h4 id="audio-api-title">🎵 音频生成 API <span class="status-indicator" id="audio-api-status"></span></h4>
+                            <div class="form-group">
+                                <label for="audio-api-provider" id="label-audio-provider">服务提供商</label>
+                                <select id="audio-api-provider" onchange="updateAudioApiFields()">
+                                    <option value="elevenlabs">ElevenLabs</option>
+                                    <option value="openai">OpenAI TTS</option>
+                                    <option value="mubert">Mubert</option>
+                                    <option value="custom">自定义 API</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="audio-api-url" id="label-audio-url">API 地址</label>
+                                <input type="url" id="audio-api-url" placeholder="https://api.elevenlabs.io/v1">
+                            </div>
+                            <div class="form-group">
+                                <label for="audio-api-key" id="label-audio-key">API 密钥</label>
+                                <input type="password" id="audio-api-key" placeholder="xi_...">
+                            </div>
+                            <button class="btn btn-secondary" onclick="testAudioApi()" id="test-audio-btn">🔧 测试连接</button>
+                        </div>
+
+                        <div style="margin-top: 20px;">
+                            <button class="btn" onclick="saveAllSettings()" id="save-settings-btn">💾 保存所有设置</button>
+                            <button class="btn btn-danger" onclick="clearAllSettings()" style="margin-left: 10px;" id="clear-settings-btn">🗑️ 清除设置</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                            <h3 style="color: #4a5568; margin-bottom: 15px;" id="api-status-title">📋 API 状态</h3>
+                            <div id="api-status-list">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span id="text-status-label">文本生成 API:</span>
+                                    <span id="text-status-text" style="color: #e53e3e;">未配置</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span id="video-status-label">视频生成 API:</span>
+                                    <span id="video-status-text" style="color: #e53e3e;">未配置</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <span id="audio-status-label">音频生成 API:</span>
+                                    <span id="audio-status-text" style="color: #e53e3e;">未配置</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 12px;">
+                            <h3 style="color: #4a5568; margin-bottom: 15px;" id="tips-title">💡 使用提示</h3>
+                            <ul style="color: #666; line-height: 1.8;" id="tips-list">
+                                <li><strong id="tip-security">API 密钥安全:</strong> <span id="tip-security-desc">所有密钥仅保存在本地浏览器中，不会上传到服务器</span></li>
+                                <li><strong>OpenAI:</strong> <span id="tip-openai">支持 GPT-3.5/GPT-4 系列模型</span></li>
+                                <li><strong>RunwayML:</strong> <span id="tip-runway">目前最先进的文本到视频生成服务</span></li>
+                                <li><strong id="tip-test">测试连接:</strong> <span id="tip-test-desc">配置后请先测试连接确保 API 正常工作</span></li>
+                                <li><strong id="tip-custom">自定义 API:</strong> <span id="tip-custom-desc">支持兼容 OpenAI 格式的第三方服务</span></li>
+                            </ul>
+                        </div>
+
+                        <div id="alert-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript 文件 - 按依赖顺序加载 -->
+    <script src="js/core.js"></script>
+    <script src="js/language.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/story.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/video.js"></script>
+    <script src="js/export.js"></script>
+</body>
+</html>
